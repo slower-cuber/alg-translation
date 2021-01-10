@@ -4,7 +4,7 @@ import {validPatternStr} from "./pattern.js";
 
 
 const tokenize = (algStr) => {
-    let normAlgStr = algStr.trim().replaceAll(/[()]/g, "");
+    let normAlgStr = algStr.trim().replace(/[()]/g, "");
     let regex = new RegExp(validPatternStr, "y");
     let tokens = [];
     let nextParseIndex = 0;
