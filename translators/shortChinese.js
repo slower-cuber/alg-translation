@@ -45,7 +45,7 @@ const translateOuterBlock = (token) => {
     let faceStr = faceMap[r[2]] + "面";
     let degreeStr = getDegreeStr(r[3]);
     let directionStr = (r[4] == "'") ? "逆" : "順";
-    return layerNum + "層" + faceStr + directionStr + degreeStr;
+    return faceStr + layerNum + "層" + directionStr + degreeStr;
 }
 
 const translateWide = (token) => {
@@ -54,7 +54,7 @@ const translateWide = (token) => {
     let faceStr = faceMap[r[1].toUpperCase()] + "面";
     let degreeStr = getDegreeStr(r[2]);
     let directionStr = (r[3] == "'") ? "逆" : "順";
-    return "兩層" + faceStr + directionStr + degreeStr;
+    return faceStr + "兩層" + directionStr + degreeStr;
 }
 
 const translateMid = (token) => {
