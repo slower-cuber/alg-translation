@@ -1,0 +1,62 @@
+<!doctype html>
+
+<html lang="zh-Hant">
+<head>
+  <meta charset="utf-8">
+
+  <title>公式翻譯器</title>
+  <meta name="description" content="Translation of Rubik's cube movement notations">
+  <meta name="author" content="Slower Cuber">
+</head>
+
+<body>
+  <div>
+    <input type="radio" name="translator"
+          id="trShortChinese" value="shortChinese"
+          checked>
+      簡短中文
+    </input>
+    <input type="radio" name="translator"
+          id="trLongChinese" value="longChinese">
+      詳細中文
+    </input>
+  </div>
+          
+  <div>
+    公式:
+    <input type="text" id="algInput" size="50" maxlength="500">
+    <button id="translate">翻譯</button>
+  </div>
+
+  <hr>
+
+  <div>
+    公式: <span id="output_alg" />
+  </div>
+  <div>
+    翻譯: <div id="translation" />
+  </div>
+
+</body>
+
+<script type="module">
+  import {translateAlgStr} from "./translate.js";
+  document.getElementById("translate").onclick = function() {
+    let algInput = document.getElementById("algInput").value;
+    let translator = document.querySelector('input[name="translator"]:checked').value;
+    let {success, tokens, translatedMoves, 
+      nextParseIndex, unparsedSeg} = translateAlgStr(algInput, translator);
+
+    document.getElementById("output_alg").textContent = tokens.join(" ");
+    if (success) {
+      let delim = (translator == "longChinese") ? "<br/>\n" : " ";
+      document.getElementById("translation").innerHTML = translatedMoves.join(delim);
+    }
+    else {
+      let msg = "我從第" + nextParseIndex + "個字開始看不懂 " + unparsedSeg + " ...";
+      document.getElementById("translation").innerHTML = msg;
+    }
+  }
+</script>
+
+</html>
